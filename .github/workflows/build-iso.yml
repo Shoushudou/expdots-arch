@@ -2,35 +2,41 @@ name: Build ExpDots ISO
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
   workflow_dispatch:
 
+env:
+  CARGO_NET_GIT_FETCH_WITH_CLI: true
+
 jobs:
-  build-iso:
+  build:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
-      
+
     steps:
-    - name: Update Arch Linux
+    - name: Update system
       run: |
         pacman -Syu --noconfirm --needed
-        pacman -S --noconfirm --needed archiso git sudo base-devel
-        
+
+    - name: Install dependencies
+      run: |
+        pacman -S --noconfirm --needed archiso git base-devel
+
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
     - name: Setup build environment
       run: |
         # Copy package list
         cp packages.x86_64 archiso/
         
-        # Create directory structure
+        # Create config directories
         mkdir -p archiso/airootfs/root/.config/{hypr,waybar,mako,mpd,ncmpcpp,cava}
         
-        # Copy config files
+        # Copy configuration files
         cp configs/hyprland.conf archiso/airootfs/root/.config/hypr/
         cp configs/waybar-config.jsonc archiso/airootfs/root/.config/waybar/config
         cp configs/mako-config archiso/airootfs/root/.config/mako/config
@@ -38,12 +44,12 @@ jobs:
         cp configs/ncmpcpp-config archiso/airootfs/root/.config/ncmpcpp/config
         cp configs/cava-config archiso/airootfs/root/.config/cava/config
         cp configs/starship.toml archiso/airootfs/root/.config/
-        
+
     - name: Build ISO
       run: |
         cd archiso
         mkarchiso -v .
-        
+
     - name: Upload ISO artifact
       uses: actions/upload-artifact@v4
       with:
