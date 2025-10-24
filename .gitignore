@@ -1,0 +1,36 @@
+# Build artifacts
+/work/
+/out/
+/aur-pkgs/
+*.iso
+*.img
+
+# AUR packages
+*.pkg.tar.*
+*.sig
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Log files
+*.log
+
+# Calamares build files
+/calamares/build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Large files (except our configs)
+!/configs/
