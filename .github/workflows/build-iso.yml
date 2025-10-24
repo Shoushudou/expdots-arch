@@ -7,22 +7,15 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  actions: read
-
 jobs:
   build-iso:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
-      options: --user root
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
     - name: Update system and install dependencies
       run: |
@@ -57,4 +50,3 @@ jobs:
         name: ExpDots-ISO
         path: archiso/out/*.iso
         retention-days: 7
-        compression-level: 9
