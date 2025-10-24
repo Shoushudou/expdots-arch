@@ -23,7 +23,7 @@ iso_description="Aesthetic Arch Linux with Hyprland and KDE Plasma"
 work_dir="work"
 out_dir="out"
 
-gpg_key=""
+bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito' 'uefi-ia32.systemd-boot.esp' 'uefi-x64.systemd-boot.esp' 'uefi-x64.systemd-boot.eltorito')
 
 packages=()
 

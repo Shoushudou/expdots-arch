@@ -10,24 +10,31 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       
-    - name: Build ISO using Docker
+    - name: Build ISO
       run: |
-        docker run --rm \
-          -v $PWD:/work \
-          -w /work \
-          archlinux:latest \
-          bash -c "
-            pacman -Syu --noconfirm
-            pacman -S --noconfirm archiso
-            cd archiso
-            mkarchiso -v .
-          "
-    
-    - name: Upload ISO
-      uses: actions/upload-artifact@v4
+        docker run --rm -v $PWD:/build -w /build archlinux:latest bash -c "
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm archiso git
+          
+          # Copy necessary files
+          cp packages.x86_64 archiso/
+          mkdir -p archiso/airootfs/root/.config/{hypr,waybar,mako,mpd,ncmpcpp,cava}
+          cp configs/hyprland.conf archiso/airootfs/root/.config/hypr/
+          cp configs/waybar-config.jsonc archiso/airootfs/root/.config/waybar/config
+          cp configs/mako-config archiso/airootfs/root/.config/mako/config
+          cp configs/mpd.conf archiso/airootfs/root/.config/mpd/
+          cp configs/ncmpcpp-config archiso/airootfs/root/.config/ncmpcpp/config
+          cp configs/cava-config archiso/airootfs/root/.config/cava/config
+          cp configs/starship.toml archiso/airootfs/root/.config/
+          
+          # Build ISO
+          cd archiso
+          mkarchiso -v .
+        "
+        
+    - uses: actions/upload-artifact@v4
       with:
         name: expdots-iso
         path: archiso/out/*.iso
