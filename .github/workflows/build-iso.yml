@@ -2,11 +2,9 @@ name: Build ExpDots ISO
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
-  release:
-    types: [ published ]
   workflow_dispatch:
 
 jobs:
@@ -16,33 +14,39 @@ jobs:
       image: archlinux:latest
       
     steps:
-    - name: Update system and install dependencies
+    - name: Update Arch Linux
       run: |
-        pacman -Syu --noconfirm
-        pacman -S --noconfirm archiso git sudo base-devel
+        pacman -Syu --noconfirm --needed
+        pacman -S --noconfirm --needed archiso git sudo base-devel
         
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Build AUR packages
+    - name: Setup build environment
       run: |
-        chmod +x build-aur.sh
-        ./build-aur.sh
+        # Copy package list
+        cp packages.x86_64 archiso/
+        
+        # Create directory structure
+        mkdir -p archiso/airootfs/root/.config/{hypr,waybar,mako,mpd,ncmpcpp,cava}
+        
+        # Copy config files
+        cp configs/hyprland.conf archiso/airootfs/root/.config/hypr/
+        cp configs/waybar-config.jsonc archiso/airootfs/root/.config/waybar/config
+        cp configs/mako-config archiso/airootfs/root/.config/mako/config
+        cp configs/mpd.conf archiso/airootfs/root/.config/mpd/
+        cp configs/ncmpcpp-config archiso/airootfs/root/.config/ncmpcpp/config
+        cp configs/cava-config archiso/airootfs/root/.config/cava/config
+        cp configs/starship.toml archiso/airootfs/root/.config/
         
     - name: Build ISO
       run: |
-        chmod +x build.sh
-        ./build.sh
+        cd archiso
+        mkarchiso -v .
         
     - name: Upload ISO artifact
       uses: actions/upload-artifact@v4
       with:
         name: ExpDots-ISO
-        path: out/*.iso
+        path: archiso/out/*.iso
         retention-days: 7
-        
-    - name: Upload to release
-      if: github.event_name == 'release'
-      uses: softprops/action-gh-release@v1
-      with:
-        files: out/*.iso
