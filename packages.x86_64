@@ -1,0 +1,193 @@
+# Base System
+base
+linux
+linux-firmware
+mkinitcpio
+systemd
+systemd-sysvcompat
+
+# Networking
+networkmanager
+network-manager-applet
+wpa_supplicant
+wireless_tools
+netctl
+dhclient
+
+# Essential Utilities
+sudo
+bash
+bash-completion
+coreutils
+findutils
+file
+grep
+sed
+gawk
+which
+diffutils
+gettext
+pciutils
+usbutils
+lsof
+psmisc
+tree
+rsync
+curl
+wget
+git
+openssh
+htop
+btop
+nvtop
+neofetch
+
+# Filesystem Tools
+dosfstools
+mtools
+ntfs-3g
+exfat-utils
+f2fs-tools
+btrfs-progs
+gvfs
+gvfs-smb
+udisks2
+
+# Archiso & Boot
+arch-install-scripts
+archiso
+pacman
+grub
+efibootmgr
+
+# Wayland & Hyprland
+xorg-server-xwayland
+wayland
+wlroots
+hyprland
+waybar
+wofi
+mako
+grim
+slurp
+swappy
+swaylock-effects
+swayidle
+
+# Terminal & Shell
+alacritty
+fish
+starship
+tmux
+
+# File Management
+thunar
+thunar-archive-plugin
+thunar-volman
+tumbler
+
+# Fonts
+ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-dejavu
+ttf-liberation
+ttf-font-awesome
+
+# Themes
+arc-gtk-theme
+papirus-icon-theme
+kvantum-qt5
+kvantum-theme-arc
+
+# Audio System
+pipewire
+pipewire-pulse
+pipewire-alsa
+pipewire-jack
+wireplumber
+pavucontrol
+pulsemixer
+playerctl
+
+# Music Applications
+mpd
+ncmpcpp
+cava
+lollypop
+
+# Browser & Media
+firefox
+vlc
+mpv
+
+# Development Tools
+base-devel
+gcc
+clang
+python
+python-pip
+nodejs
+npm
+rust
+go
+jdk-openjdk
+docker
+docker-compose
+
+# Security & Hacking Tools
+nmap
+sqlmap
+hydra
+wireshark-qt
+aircrack-ng
+hashcat
+john
+metasploit
+
+# Gaming
+steam
+vulkan-icd-loader
+lib32-vulkan-icd-loader
+lib32-mesa
+mangohud
+gamemode
+lib32-gamemode
+
+# KDE Plasma (Minimal)
+sddm
+plasma-desktop
+plasma-wayland-session
+kde-cli-tools
+kio
+dolphin
+kate
+konsole
+kcalc
+kde-gtk-config
+breeze-gtk
+
+# Graphics & Office
+gimp
+inkscape
+libreoffice-fresh
+evince
+
+# System Utilities
+calamares
+gparted
+gnome-disk-utility
+baobab
+
+# Additional Tools
+unzip
+unrar
+p7zip
+zip
+cmake
+meson
+ninja
+light
+brightnessctl

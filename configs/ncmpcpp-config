@@ -1,0 +1,49 @@
+# ncmpcpp configuration
+
+mpd_host = "127.0.0.1"
+mpd_port = "6600"
+mpd_music_dir = "~/Music"
+
+# Visualizer
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "Visualizer"
+visualizer_sync_interval = "30"
+visualizer_in_stereo = "yes"
+visualizer_type = "spectrum"
+visualizer_look = "●▮"
+
+# Display
+now_playing_prefix = "$b$2$9 "
+now_playing_suffix = "  $/b$8"
+browser_display_mode = "columns"
+playlist_display_mode = "columns"
+
+# Colors
+current_item_prefix = "$b$5$9 "
+current_item_suffix = " $/b$8"
+color1 = "white"
+color2 = "blue"
+
+progressbar_look = "━━━"
+progressbar_color = "black"
+progressbar_elapsed_color = "blue"
+
+statusbar_visibility = "yes"
+header_visibility = "no"
+titles_visibility = "no"
+
+song_list_format = "{$4%a$9} - {$7%t$9}|{$8%f$9}$R{$3%l$9}"
+
+autocenter_mode = "yes"
+centered_cursor = "yes"
+ignore_leading_the = "yes"
+
+cyclic_scrolling = "yes"
+follow_now_playing_lyrics = "yes"
+mouse_support = "yes"
+
+lines_scrolled = "1"
+song_library_format = "{%n - }{%t$9}|{%f$9}"
+
+alternative_header_first_line_format = "$b$5$9 ExpDots Music Player"
+alternative_header_second_line_format = "{{%a} - {%t}}|{%f}"

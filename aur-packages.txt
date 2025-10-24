@@ -1,0 +1,6 @@
+# AUR Packages for ExpDots
+hyprland-git
+spotify-launcher
+easyeffects
+obsidian
+visual-studio-code-bin

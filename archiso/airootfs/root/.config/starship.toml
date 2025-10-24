@@ -1,0 +1,72 @@
+# ExpDots Starship Prompt
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "@[$hostname]($style) "
+trim_at = ".local"
+style = "bold green"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+format = "in [$path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch]($style) "
+style = "bold yellow"
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷"
+stashed = "📦"
+modified = "📝"
+staged = "[++\($count\)](green)"
+renamed = "👅"
+deleted = "🗑"
+style = "bold red"
+format = "([$all_status$ahead_behind]($style) )"
+
+[cmd_duration]
+min_time = 1000
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+[python]
+pyenv_version_name = true
+pyenv_prefix = "venv "
+python_prefix = "🐍 "
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold yellow)"

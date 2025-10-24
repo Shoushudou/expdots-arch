@@ -1,0 +1,48 @@
+name: Build ExpDots ISO
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+  workflow_dispatch:
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+      
+    steps:
+    - name: Update system and install dependencies
+      run: |
+        pacman -Syu --noconfirm
+        pacman -S --noconfirm archiso git sudo base-devel
+        
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Build AUR packages
+      run: |
+        chmod +x build-aur.sh
+        ./build-aur.sh
+        
+    - name: Build ISO
+      run: |
+        chmod +x build.sh
+        ./build.sh
+        
+    - name: Upload ISO artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ExpDots-ISO
+        path: out/*.iso
+        retention-days: 7
+        
+    - name: Upload to release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: out/*.iso

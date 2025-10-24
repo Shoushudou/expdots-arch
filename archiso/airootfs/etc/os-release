@@ -1,0 +1,11 @@
+NAME="ExpDots for Arch"
+PRETTY_NAME="ExpDots for Arch Linux"
+ID=expdots
+ID_LIKE=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://github.com/shoushudou/expdots-arch"
+DOCUMENTATION_URL="https://github.com/shoushudou/expdots-arch/wiki"
+SUPPORT_URL="https://github.com/shoushudou/expdots-arch/issues"
+BUG_REPORT_URL="https://github.com/shoushudou/expdots-arch/issues"
+LOGO=expdots
