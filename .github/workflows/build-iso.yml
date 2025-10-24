@@ -2,31 +2,32 @@ name: Build ExpDots ISO
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
-env:
-  CARGO_NET_GIT_FETCH_WITH_CLI: true
+permissions:
+  contents: read
+  actions: read
 
 jobs:
-  build:
+  build-iso:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
+      options: --user root
 
     steps:
-    - name: Update system
-      run: |
-        pacman -Syu --noconfirm --needed
-
-    - name: Install dependencies
-      run: |
-        pacman -S --noconfirm --needed archiso git base-devel
-
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Update system and install dependencies
+      run: |
+        pacman -Syu --noconfirm
+        pacman -S --noconfirm --needed archiso git base-devel
 
     - name: Setup build environment
       run: |
@@ -56,3 +57,4 @@ jobs:
         name: ExpDots-ISO
         path: archiso/out/*.iso
         retention-days: 7
+        compression-level: 9
